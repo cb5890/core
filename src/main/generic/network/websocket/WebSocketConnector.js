@@ -128,7 +128,7 @@ class WebSocketConnector extends Observable {
     _onConnection(ws, req) {
         let remoteAddress = ws._socket.remoteAddress;
 
-        Log.d(WebSocketConnector, () => `These are all the headers I see: ${req.headers}`);
+        Log.v(WebSocketConnector, () => `These are all the headers I see: ${JSON.stringify(req.headers)}`);
 
         // If we're behind a reverse proxy, the peer's IP will be in the header set by the reverse proxy, not in the ws._socket object
         if (this._networkConfig.usingReverseProxy) {
