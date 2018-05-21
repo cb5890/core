@@ -136,7 +136,7 @@ class WebSocketConnector extends Observable {
             if (remoteAddress === rpAddress) {
                 const rpHeader = this._networkConfig.reverseProxyConfig.header;
                 if (req.headers[rpHeader]) {
-                    remoteAddress = req.headers[rpHeader];
+                    remoteAddress = req.headers[rpHeader].split(/\s*,\s*/)[0];
                 } else {
                     Log.e(WebSocketConnector, () => `Expected header '${rpHeader}' to contain the real IP from the connecting client`);
                 }
