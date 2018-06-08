@@ -142,7 +142,7 @@ class WsNetworkConfig extends NetworkConfig {
      * @param {string} cert
      */
     constructor(host, port, key, cert) {
-        super(Protocol.WS);
+        super(Protocol.WS | Protocol.WSS);
         this._host = host;
         this._port = port;
         this._key = key;
@@ -163,7 +163,7 @@ class WsNetworkConfig extends NetworkConfig {
     }
 
     /**
-     * @type {WsPeerAddress}
+     * @type {WssPeerAddress}
      * @override
      */
     get peerAddress() {
@@ -171,7 +171,7 @@ class WsNetworkConfig extends NetworkConfig {
             throw 'PeerAddress is not configured.';
         }
 
-        const peerAddress = new WsPeerAddress(
+        const peerAddress = new WssPeerAddress(
             this._services.provided, Date.now(), NetAddress.UNSPECIFIED,
             this.publicKey, /*distance*/ 0,
             this._host, this._port);
@@ -191,7 +191,8 @@ class RtcNetworkConfig extends NetworkConfig {
      * @constructor
      */
     constructor() {
-        super(Protocol.WS | Protocol.RTC);
+        // TODO: Also allow WS when possible in browser.
+        super(Protocol.WSS | Protocol.RTC);
         this._rtcConfig = {
             iceServers: [
                 {urls: 'stun:stun.l.google.com:19302'},
@@ -231,7 +232,7 @@ class DumbNetworkConfig extends NetworkConfig {
      * @constructor
      */
     constructor() {
-        super(Protocol.WS);
+        super(Protocol.WS | Protocol.WSS);
     }
 
     /**
