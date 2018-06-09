@@ -13,12 +13,12 @@ class WebSocketFactory {
             cert: fs.readFileSync(sslConfig.cert)
         };
 
-        const httpsServer = https.createServer(options, (req, res) => {
-            res.writeHead(200);
-            res.end('Nimiq NodeJS Client\n');
-        }).listen(port);
+        //const httpServer = http.createServer((req, res) => {
+        //    res.writeHead(200);
+        //    res.end('Nimiq NodeJS Client\n');
+        //}).listen(port);
 
-        return new WebSocket.Server({ server: httpsServer });
+        return new WebSocket.Server({ port: port });
     }
 
     /**
